@@ -1,0 +1,28 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.galleryItem {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+canvas {
+  padding: 20px;
+  margin-top: 90px;
+  margin-bottom: 90px;
+  border: 20px solid black;
+  box-shadow: -10px 10px 50px grey;
+}
+
+header {
+  margin-top: 40px;
+  margin-left: 40px;
+}
+
+.description {
+  width: 25%;
+}
