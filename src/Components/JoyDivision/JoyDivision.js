@@ -11,12 +11,14 @@ const JoyDivision = observer(
       let step = store.step;
       let lines = [];
 
-      // Create the lines
       for (let i = step; i <= size - step; i += step) {
         let line = [];
         for (let j = step; j <= size - step; j += step) {
           let distanceToCenter = Math.abs(j - size / 2);
-          let letiance = Math.max(size / 2 - store.peakwidth - distanceToCenter, 0);
+          let letiance = Math.max(
+            size / 2 - store.peakwidth - distanceToCenter,
+            0
+          );
           let random = ((Math.random() * letiance) / 2) * -store.peakheight;
           let point = { x: j, y: i + random };
           line.push(point);
@@ -24,7 +26,6 @@ const JoyDivision = observer(
         lines.push(line);
       }
 
-      // Do the drawing
       for (let i = 5; i < lines.length; i++) {
         context.beginPath();
         context.moveTo(lines[i][0].x, lines[i][0].y);
