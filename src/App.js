@@ -33,13 +33,18 @@ class App extends Component {
           <JoyDivision />
           <JoyDivisionSettings />
         </div>
+       
         <div className="galleryItem">
+          <h1>Tiled Lines</h1>
+          <TiledLines />
+        </div>
+         <div className="galleryItem">
           <HypnoticSquareSettings />
           <HypnoticSquares />
           <div className="description">
             <h1>Hypnotic Squares</h1>
             <p>
-              Creator: 
+              Creator:
               <a
                 href="http://dada.compart-bremen.de/item/agent/644"
                 target="blank"
@@ -57,15 +62,11 @@ class App extends Component {
           </div>
         </div>
         <div className="galleryItem">
-          <h1>Tiled Lines</h1>
-          <TiledLines />
-        </div>
-        <div className="galleryItem">
           <CubicDisarray />
           <div className="description">
             <h1>CubicDisarray</h1>
             <p>
-              Creator:
+              Creator: 
               <a href="https://en.wikipedia.org/wiki/Georg_Nees" target="blank">
                 George Nees
               </a>

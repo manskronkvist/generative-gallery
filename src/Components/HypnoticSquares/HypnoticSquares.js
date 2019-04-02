@@ -30,7 +30,7 @@ const HypnoticSquares = observer(
 
       for (let x = offset; x < size - offset; x += tileStep) {
         for (let y = offset; y < size - offset; y += tileStep) {
-          startSteps = 2 + Math.ceil(Math.random() * store.startSteps); // adjust here
+          startSteps = 4 + Math.ceil(Math.random() * store.startSteps);
           let xDirection =
             directions[Math.floor(Math.random() * directions.length)];
           let yDirection =
@@ -68,7 +68,7 @@ const HypnoticSquares = observer(
             ref="canvas"
             width={store.width}
             height={store.height}
-            observables={{ ...store }} //Passing observables as props to force rerendering on updated values
+            observables={{ ...store }}
           />
         </div>
       );

@@ -69,7 +69,7 @@ const JoyDivision = observer(
             ref="canvas"
             width={store.width}
             height={store.height}
-            observables={{ ...store }} //Passing observables as props to force rerendering on updated values
+            observables={{ ...store }}
           />
         </div>
       );
