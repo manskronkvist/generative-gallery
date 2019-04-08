@@ -1,68 +1,63 @@
-import React, { Component } from "react";
-import { observer } from "mobx-react";
-import store from "./store";
+import React, { useEffect } from "react";
 
-const TiledLine = observer(
-  class TiledLine extends Component {
-    draw(context, canvas) {
-      let step = store.steps;
+const TiledLine = () => {
+  let canvas;
 
-      context.clearRect(0, 0, canvas.width, canvas.height);
+  function draw(context, canvas) {
+    let step = 40;
 
-      context.lineCap = "square";
-      context.lineWidth = 2;
+    canvas.width = canvas.width; // clears ALL canvas state
 
-      context.strokeStyle = `hsl(${Math.floor(Math.random() * Math.floor(360))},${Math.floor(Math.random() * Math.floor(100))}%,${Math.floor(Math.random() * Math.floor(100))}%)`
-      context.fillStyle = `hsl(${Math.floor(Math.random() * Math.floor(360))},${Math.floor(Math.random() * Math.floor(100))}%,${Math.floor(Math.random() * Math.floor(100))}%)`
-      context.fillRect(0, 0, store.width, store.height)
+    context.lineCap = "square";
+    context.lineWidth = 2;
 
-      function paintTiles(context, x, y, width, height) {
-        let leftToRight = Math.random() >= 0.5;
+    context.strokeStyle = `
+      hsl(
+        ${Math.floor(Math.random() * Math.floor(360))},
+        ${Math.floor(Math.random() * Math.floor(100))}%,
+        ${Math.floor(Math.random() * Math.floor(100))}%
+      )`;
 
-        if (leftToRight) {
-          context.moveTo(x, y);
-          context.lineTo(x + width, y + height);
-        } else {
-          context.moveTo(x + width, y);
-          context.lineTo(x, y + height);
-        }
+    context.fillStyle = `
+      hsl(
+        ${Math.floor(Math.random() * Math.floor(360))},
+        ${Math.floor(Math.random() * Math.floor(100))}%,
+        ${Math.floor(Math.random() * Math.floor(100))}%
+      )`;
 
-        context.stroke();
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    function paintTiles(context, x, y, width, height) {
+      let leftToRight = Math.random() >= 0.5;
+
+      if (leftToRight) {
+        context.moveTo(x, y);
+        context.lineTo(x + width, y + height);
+      } else {
+        context.moveTo(x + width, y);
+        context.lineTo(x, y + height);
       }
 
-      for (let x = 0; x < store.width; x += step) {
-        for (let y = 0; y < store.width; y += step) {
-          paintTiles(context, x, y, step, step);
-        }
+      context.stroke();
+    }
+
+    for (let x = 0; x < canvas.width; x += step) {
+      for (let y = 0; y < canvas.width; y += step) {
+        paintTiles(context, x, y, step, step);
       }
-    }
-
-    componentDidMount() {
-      const canvas = this.refs.canvas;
-      const context = canvas.getContext("2d");
-      context.clearRect(0, 0, canvas.width, canvas.height);
-      this.draw(context, canvas);
-    }
-
-    componentDidUpdate() {
-      const canvas = this.refs.canvas;
-      const context = canvas.getContext("2d");
-      context.clearRect(0, 0, store.width, store.height);
-      this.draw(context, canvas);
-    }
-
-    render() {
-      return (
-        <div>
-          <canvas
-            ref="canvas"
-            width={store.width}
-            height={store.height}
-          />
-        </div>
-      );
     }
   }
-);
+
+  useEffect(() => {
+    const context = canvas.getContext("2d");
+    draw(context, canvas);
+  });
+
+  return (
+    <div onClick={() => draw(canvas.getContext("2d"), canvas)}>
+      <canvas ref={el => (canvas = el)} width={500} height={500} />
+    </div>
+  );
+};
 
 export default TiledLine;
